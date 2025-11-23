@@ -47,9 +47,10 @@ jobs:
 
       - name: Publish package to npm
         if: steps.changesets.outputs.hasChangesets == 'false'
-        run: pnpm publish --provenance --access public
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
 
       - name: Publish package to jsr
         if: steps.changesets.outputs.hasChangesets == 'false'
