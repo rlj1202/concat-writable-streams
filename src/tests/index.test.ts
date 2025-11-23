@@ -43,6 +43,28 @@ describe("concat-writable-streams", () => {
 
     await expect(promise).rejects.toThrow(RangeError);
   });
+
+  it("should ensure fianlly block inside a generator to be executed", async () => {
+    let cnt: number = 0;
+
+    await toReadableStream(function* () {
+      for (let i = 0; i < 10; i++) {
+        yield `${i}`;
+      }
+    }).pipeTo(
+      concatWritableStreams(function* () {
+        for (let i = 0; i < 3; i++) {
+          try {
+            yield new LimitedWritableStream(5, new InMemoryWritableStream());
+          } finally {
+            cnt++;
+          }
+        }
+      }),
+    );
+
+    expect(cnt).toStrictEqual(2);
+  });
 });
 
 function toReadableStream<T>(
