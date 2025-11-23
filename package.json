@@ -56,5 +56,13 @@
   "packageManager": "pnpm@10.23.0",
   "dependencies": {
     "@changesets/cli": "^2.29.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlj1202/concat-writable-streams.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rlj1202/concat-writable-streams/issues"
+  },
+  "homepage": "https://github.com/rlj1202/concat-writable-streams#readme"
 }
