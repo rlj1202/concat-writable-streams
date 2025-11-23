@@ -1,12 +1,20 @@
 {
   "name": "@rlj1202/concat-writable-streams",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "exports": {
     "./package.json": "./package.json",
     ".": "./src/index.ts"
   },
   "publish": {
-    "include": ["src", "LICENSE", "package.json", "README.md"],
-    "exclude": ["**/tests/**", "dist"]
+    "include": [
+      "src",
+      "LICENSE",
+      "package.json",
+      "README.md"
+    ],
+    "exclude": [
+      "**/tests/**",
+      "dist"
+    ]
   }
 }
