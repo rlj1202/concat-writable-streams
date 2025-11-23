@@ -1,8 +1,8 @@
-type ConcatSinkOptions = {
-  preventAbort?: boolean;
-
-  preventClose?: boolean;
-};
+/**
+ * Concatenates multiple writable streams into a single ordered one
+ *
+ * @module
+ */
 
 class ConcatSink<T> implements UnderlyingSink<T> {
   readonly #gen:
@@ -11,7 +11,7 @@ class ConcatSink<T> implements UnderlyingSink<T> {
     | (() => Generator<WritableStream<T>>)
     | (() => AsyncGenerator<WritableStream<T>>);
 
-  readonly #options: ConcatSinkOptions | undefined;
+  readonly #options: ConcatWritableStreamOptions | undefined;
 
   #iter:
     | Iterator<WritableStream<T>>
@@ -26,7 +26,7 @@ class ConcatSink<T> implements UnderlyingSink<T> {
       | AsyncIterable<WritableStream<T>>
       | (() => Generator<WritableStream<T>>)
       | (() => AsyncGenerator<WritableStream<T>>),
-    options?: ConcatSinkOptions,
+    options?: ConcatWritableStreamOptions,
   ) {
     this.#gen = gen;
     this.#options = options;
@@ -104,8 +104,19 @@ class ConcatSink<T> implements UnderlyingSink<T> {
   }
 }
 
-export type ConcatWritableStreamOptions = ConcatSinkOptions;
+/**
+ * Options for `ConcatWritableStream`.
+ */
+export type ConcatWritableStreamOptions = {
+  preventAbort?: boolean;
 
+  preventClose?: boolean;
+};
+
+/**
+ * Concatenates multiple `WritableStream`s into a single ordered
+ * `WritableStream`.
+ */
 export class ConcatWritableStream<T> extends WritableStream<T> {
   constructor(
     streams:
@@ -119,6 +130,10 @@ export class ConcatWritableStream<T> extends WritableStream<T> {
   }
 }
 
+/**
+ * Concatenates multiple `WritableStream`s into a single ordered
+ * `WritableStream`.
+ */
 export function concatWritableStreams<T>(
   streams:
     | Iterable<WritableStream<T>>
