@@ -40,6 +40,8 @@ jobs:
         uses: changesets/action@v1
         with:
           version: pnpm bump
+          commit: "ci(changeset): version packages"
+          title: "ci(changeset): version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
