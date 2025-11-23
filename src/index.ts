@@ -126,6 +126,6 @@ export function concatWritableStreams<T>(
     | (() => Generator<WritableStream<T>>)
     | (() => AsyncGenerator<WritableStream<T>>),
   options?: ConcatWritableStreamOptions,
-) {
+): ConcatWritableStream<T> {
   return new ConcatWritableStream<T>(streams, options);
 }
