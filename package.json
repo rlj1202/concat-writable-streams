@@ -1,0 +1,49 @@
+{
+  "name": "@rlj1202/concat-writable-streams",
+  "version": "0.0.0",
+  "type": "module",
+  "license": "MIT",
+  "author": "Jisu Sim <rlj1202@gmail.com>",
+  "description": "Concatenates multiple writable streams into a single ordered one",
+  "keywords": [
+    "typescript",
+    "stream",
+    "streams",
+    "writable-stream",
+    "writablestream",
+    "concat"
+  ],
+  "zshy": {
+    "exports": {
+      "./packages.json": "./package.json",
+      ".": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "zshy",
+    "test": "vitest run",
+    "check:type": "tsc --noEmit",
+    "check:biome": "biome check"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.7",
+    "@std/streams": "jsr:^1.0.14",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.13",
+    "zshy": "^0.6.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.cts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./packages.json": "./package.json"
+  }
+}
