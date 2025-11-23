@@ -1,0 +1,54 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  # https://docs.npmjs.com/generating-provenance-statements#example-github-actions-workflow
+  # https://jsr.io/docs/publishing-packages#publishing-from-github-actions
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write # The OIDC ID token is used for authentication with JSR.
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        
+      - run: pnpm install
+
+      - run: pnpm build
+      
+      - run: pnpm test
+
+      - name: Create Release Pull Request
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm bump
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish package to npm
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        run: pnpm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish package to jsr
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        run: npx jsr publish
