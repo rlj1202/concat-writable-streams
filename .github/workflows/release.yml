@@ -53,9 +53,7 @@ jobs:
 
       - name: Publish package to npm
         if: steps.changesets.outputs.hasChangesets == 'false'
-        run: pnpm publish --access public
-        env:
-          NPM_CONFIG_PROVENANCE: true
+        run: npm publish --access public
 
       - name: Publish package to jsr
         if: steps.changesets.outputs.hasChangesets == 'false'
