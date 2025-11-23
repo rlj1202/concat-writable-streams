@@ -22,6 +22,7 @@
   "scripts": {
     "build": "zshy",
     "test": "vitest run",
+    "bump": "changeset version && echo \"$(jq \".version = \\\"$(jq -r \".version\" package.json)\\\"\" jsr.json)\" > jsr.json",
     "check:type": "tsc --noEmit",
     "check:biome": "biome check",
     "check:npm": "pnpm publish --access public --dry-run --no-git-checks",
