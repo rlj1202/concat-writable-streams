@@ -53,7 +53,7 @@ jobs:
 
       - name: Publish package to npm
         if: steps.changesets.outputs.hasChangesets == 'false'
-        run: npm publish --access public
+        run: npm publish --provenance --access public
 
       - name: Publish package to jsr
         if: steps.changesets.outputs.hasChangesets == 'false'
