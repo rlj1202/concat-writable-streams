@@ -1,6 +1,6 @@
 {
   "name": "@rlj1202/concat-writable-streams",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "license": "MIT",
   "author": "Jisu Sim <rlj1202@gmail.com>",
