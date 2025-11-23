@@ -24,7 +24,9 @@
     "test": "vitest run",
     "check:type": "tsc --noEmit",
     "check:biome": "biome check",
+    "check:npm": "pnpm publish --access public --dry-run --no-git-checks",
     "check:jsr": "pnpm dlx jsr publish --dry-run --allow-dirty",
+    "publish:npm": "pnpm publish --access public",
     "publish:jsr": "pnpm dlx jsr publish"
   },
   "devDependencies": {
@@ -35,7 +37,9 @@
     "zshy": "^0.6.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "package.json"
   ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
