@@ -23,7 +23,9 @@
     "build": "zshy",
     "test": "vitest run",
     "check:type": "tsc --noEmit",
-    "check:biome": "biome check"
+    "check:biome": "biome check",
+    "check:jsr": "pnpm dlx jsr publish --dry-run --allow-dirty",
+    "publish:jsr": "pnpm dlx jsr publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.7",
